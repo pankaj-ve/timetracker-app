@@ -18,9 +18,10 @@ function login(email, password) {
 		})
 	};
 
-	return fetch(`http://localhost:3002/auth/login`, requestOptions)
+	return fetch(`http://localhost:3000/api/v1/admin/login`, requestOptions)
 		.then(handleResponse)
 		.then(user => {
+			console.log(user,'user-----');
 			// store user details and jwt token in local storage to keep user logged in between page refreshes
 			localStorage.setItem('user', JSON.stringify(user));
 			return user;
@@ -39,14 +40,14 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-	console.log(user,'user registration*********************');
-    return fetch(`http://localhost:3002/auth/register`, requestOptions).then(handleResponse);
+    return fetch(`http://localhost:3000/api/v1/admin/signup`, requestOptions).then(handleResponse);
 }
 
 
 function handleResponse(response) {
 	return response.text().then(text => {
 		const data = text && JSON.parse(text);
+		console.log(data,'data data----');
 		if (!response.ok) {
 			if (response.status === 401) {
 				// auto logout if 401 response returned from api

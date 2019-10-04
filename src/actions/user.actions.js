@@ -62,12 +62,12 @@ function register(user) {
         userService.register(user)
             .then(
                 user => { 
-					console.log(user,'api rpsonse for registration---')
-                    // dispatch(success());
+                    dispatch(success());
                     // history.push('/login');
-                    // dispatch(alertActions.success('Registration successful'));
+                    dispatch(alertActions.success('Registration successful. Login to Continue!'));
                 },
                 error => {
+					console.log(error,'error--------------------------')
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
                 }
